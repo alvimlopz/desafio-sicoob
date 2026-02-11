@@ -1,0 +1,15 @@
+# Maven
+target/
+*.jar
+*.war
+
+# IDEs (Eclipse/VS Code)
+.settings/
+.project
+.classpath
+.factorypath
+.vscode/
+
+# OS
+Thumbs.db
+.DS_Store
