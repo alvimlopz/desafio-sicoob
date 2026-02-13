@@ -1,1 +1,69 @@
-<p>transferencia-form works!</p>
+<div class="sicoob-hero">
+  <nav class="sicoob-navbar">
+    <div class="container d-flex align-items-center justify-content-between pt-3">
+      <img class="sicoob-logo" src="/images/log.png" alt="Evolve" />
+      <button type="button" class="btn btn-light rounded-pill px-4" (click)="voltar()">
+        <i class="bi bi-arrow-left me-2"></i> Voltar
+      </button>
+    </div>
+  </nav>
+
+  <header class="main-header">
+    <div class="container">
+      <h1 class="h2 fw-bold mb-1">Nova Transferência</h1>
+      <p class="opacity-75 mb-0">Realize transferências entre seus benefícios de forma simples.</p>
+    </div>
+  </header>
+</div>
+
+<main class="container">
+  <div class="transfer-card animate__animated animate__fadeIn">
+    <div class="card-header-simple">
+      <h3>Detalhes da Operação</h3>
+    </div>
+
+    <form (ngSubmit)="executar()" #transfForm="ngForm" class="p-4 p-md-5">
+      <div class="mb-2">
+        <label class="fw-bold mb-2" style="color: #006b1f;">Origem do recurso</label>
+        <select class="form-select-lg-custom" [(ngModel)]="transferencia.fromId" name="fromId" required>
+          <option [ngValue]="0" disabled>Selecione a conta de saída</option>
+          <option *ngFor="let b of beneficios" [ngValue]="b.id">
+            {{ b.nome }} — (Saldo: {{ b.valor | currency:'BRL' }})
+          </option>
+        </select>
+      </div>
+
+      <div class="flow-icon">
+        <i class="bi bi-arrow-down-short"></i>
+      </div>
+
+      <div class="mb-4">
+        <label class="fw-bold mb-2" style="color: #006b1f;">Destino do recurso</label>
+        <select class="form-select-lg-custom" [(ngModel)]="transferencia.toId" name="toId" required>
+          <option [ngValue]="0" disabled>Selecione o benefício destino</option>
+          <option *ngFor="let b of beneficios" [ngValue]="b.id">{{ b.nome }}</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label class="fw-bold mb-2" style="color: #006b1f;">Valor da operação</label>
+        <div class="input-money-group">
+          <span class="currency-tag">R$</span>
+          <input type="number" class="form-control-lg-custom" [(ngModel)]="transferencia.amount" name="amount" required step="0.01" placeholder="0,00" />
+        </div>
+      </div>
+
+      <button type="submit" class="btn-confirm" [disabled]="!transfForm.form.valid || transferencia.fromId === transferencia.toId">
+        Confirmar Transferência
+      </button>
+      
+      <button type="button" class="btn-link-cancel" (click)="cancelar()">
+        Cancelar Operação
+      </button>
+
+      <div class="text-danger text-center fw-bold mt-3" *ngIf="transferencia.fromId === transferencia.toId && transferencia.fromId !== 0">
+        Origem e destino não podem ser iguais.
+      </div>
+    </form>
+  </div>
+</main>

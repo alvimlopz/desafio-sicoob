@@ -1,1 +1,134 @@
-<p>beneficio-lista works!</p>
+<div class="sicoob-hero">
+
+  <!-- NAV principal com LOGO -->
+  <nav class="sicoob-navbar">
+    <div class="container d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center gap-3">
+        <img class="sicoob-logo" src="/images/log.png" alt="Sicoob" />
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER do portal -->
+  <header class="main-header">
+    <div class="container header-row">
+      <div class="brand-group">
+        <h1 class="h2 fw-bold mb-1">Portal de Benefícios</h1>
+        <p class="opacity-75 mb-0">Gestão centralizada de ativos e transferências corporativas</p>
+      </div>
+
+      <div class="header-actions">
+        <button class="btn btn-light rounded-pill px-4 shadow-sm" (click)="carregarBeneficios()">
+          <i class="bi bi-arrow-clockwise me-2"></i> Sincronizar
+        </button>
+
+        <button class="btn btn-transfer px-4 shadow-sm" routerLink="/transferir">
+          <i class="bi bi-plus-lg me-2"></i> Nova Transferência
+        </button>
+      </div>
+    </div>
+  </header>
+
+</div>
+
+<main class="container pb-5">
+  <div class="table-container shadow-lg border-0 animate__animated animate__fadeIn">
+    <table class="table table-hover align-middle mb-0">
+      <thead>
+        <tr>
+          <th class="ps-4 py-3">ID</th>
+          <th class="py-3">Beneficiário</th>
+          <th class="py-3">Conta / Descrição</th>
+          <th class="text-end py-3">Saldo Disponível</th>
+          <th class="text-center py-3">Status</th>
+          <th class="text-center py-3 pe-4">Ações</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let b of beneficios" class="table-row-spacing">
+          <td class="ps-4 text-muted fw-medium">#{{ b.id }}</td>
+          <td><span class="fw-bold text-dark">{{ b.nome }}</span></td>
+          <td><span class="text-secondary small">{{ b.descricao }}</span></td>
+          <td class="text-end"><span class="currency-cell fs-5">{{ b.valor | currency:'BRL' }}</span></td>
+          <td class="text-center">
+            <span [class]="b.ativo ? 'status-pill active' : 'status-pill inactive'">
+              {{ b.ativo ? 'Ativo' : 'Bloqueado' }}
+            </span>
+          </td>
+          <td class="text-center pe-4">
+            <div class="actions-inline">
+              <button class="btn btn-action btn-transfer-icon" title="Transferir"
+                      [routerLink]="['/transferir']" [queryParams]="{ fromId: b.id }">
+                <i class="bi bi-send-fill"></i>
+              </button>
+              <button
+                  class="btn btn-action btn-edit-icon"
+                  title="Editar"
+                  type="button"
+                  (click)="abrirEdicao(b)"
+                >
+                  <i class="bi bi-pencil-square"></i>
+                </button>
+
+                <button
+                  class="btn btn-action btn-delete-icon"
+                  title="Excluir"
+                  type="button"
+                  (click)="confirmarExclusao(b)"
+                >
+                  <i class="bi bi-trash3-fill"></i>
+                </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+<div class="modal-backdrop-custom" *ngIf="editando">
+  <div class="modal-card animate__animated animate__fadeInDown">
+    <div class="modal-header">
+      <h5 class="modal-title">Editar Benefício</h5>
+    </div>
+
+    <div class="modal-body" *ngIf="beneficioEdit">
+      <div class="row g-3">
+        <div class="col-12">
+          <label class="form-label-custom">Nome do Beneficiário</label>
+          <input class="form-control-custom" [(ngModel)]="beneficioEdit.nome" placeholder="Ex: Emanuel" />
+        </div>
+
+        <div class="col-12">
+          <label class="form-label-custom">Descrição da Conta</label>
+          <input class="form-control-custom" [(ngModel)]="beneficioEdit.descricao" placeholder="Ex: Conta Origem" />
+        </div>
+
+        <div class="col-md-8">
+          <label class="form-label-custom">Saldo Disponível (R$)</label>
+          <div class="input-group-custom">
+            <span class="input-prefix">R$</span>
+            <input type="number" class="form-control-custom has-prefix" [(ngModel)]="beneficioEdit.valor" step="0.01" />
+          </div>
+        </div>
+
+        <div class="col-md-4 d-flex align-items-end">
+          <div class="form-check-custom">
+            <input id="ativo" type="checkbox" [(ngModel)]="beneficioEdit.ativo" name="ativo">
+            <label for="ativo">Cadastro Ativo</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer-custom">
+      <button type="button" class="btn-cancelar" (click)="cancelarEdicao()">Cancelar</button>
+      <button type="button" class="btn-salvar" (click)="salvarEdicao()">
+        <i class="bi bi-check2-circle"></i> Salvar Alterações
+      </button>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>

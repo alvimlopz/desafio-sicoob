@@ -1,0 +1,120 @@
+
+.sicoob-hero {
+  background: #006b1f !important; 
+  padding: 0 1.25rem;
+  min-height: 200px;
+}
+
+.sicoob-logo {
+  height: 120px; 
+  width: auto;
+  display: block;
+}
+
+.main-header {
+  background: transparent !important;
+  color: #fff !important;
+  padding: 1rem 0;
+  border-bottom: 3px solid #7DB61C; 
+}
+
+.transfer-card {
+  max-width: 650px;
+  margin: -40px auto 40px;
+  background: #fff;
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+.card-header-simple {
+  padding: 2rem 2rem 0;
+  text-align: center;
+  h3 {
+    color: #006b1f;
+    font-weight: 800;
+  }
+}
+
+.form-select-lg-custom, .form-control-lg-custom {
+  width: 100%;
+  height: 55px;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  padding: 0 1rem;
+  font-size: 1.1rem;
+  background-color: #fdfdfd;
+
+  &:focus {
+    outline: none;
+    border-color: #7DB61C;
+    background-color: #fff;
+  }
+}
+
+.flow-icon {
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem 0;
+  color: #7DB61C;
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.input-money-group {
+  position: relative;
+  .currency-tag {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 700;
+    color: #94a3b8;
+  }
+  input { padding-left: 3.5rem; }
+}
+
+.btn-confirm {
+  width: 100%;
+  height: 58px;
+  background: #7DB61C;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 12px rgba(125, 182, 28, 0.3);
+
+  &:hover:not(:disabled) {
+    background: #6a9b18;
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    background: #e9ecef;
+    color: #999;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}
+
+.btn-link-cancel {
+  width: 100%;
+  background: none;
+  border: none;
+  color: #666;
+  margin-top: 1rem;
+  font-weight: 600;
+  &:hover { color: #d63031; }
+}
+
+.input-money-group, .money-wrapper {
+  width: 100% !important;
+  max-width: 100%;
+  display: flex; 
+}
+
+.custom-input-field, input[type="number"] {
+  width: 100% !important; 
+  box-sizing: border-box;
+}
