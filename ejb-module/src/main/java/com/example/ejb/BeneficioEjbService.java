@@ -29,7 +29,6 @@ public class BeneficioEjbService implements BeneficioEjbRemote {
         }
 
         try {
-            // Lock otimista: valida concorrência via @Version
             Beneficio from = em.find(Beneficio.class, fromId, LockModeType.OPTIMISTIC);
             Beneficio to   = em.find(Beneficio.class, toId,   LockModeType.OPTIMISTIC);
 
